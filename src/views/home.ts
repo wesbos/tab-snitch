@@ -298,6 +298,28 @@ ${ogTags}
   }
   button[type="submit"]:hover { background: #2855e0; }
 
+  /* Wes Bos signature footer — yellow highlighter under the name */
+  .wb-footer {
+    max-width: 920px;
+    margin: 24px auto 0;
+    padding: 0 8px;
+    text-align: center;
+    font-size: 15px;
+    color: #2b2f36;
+    letter-spacing: 0.01em;
+  }
+  .wb-name {
+    display: inline-block;
+    color: #000;
+    font-weight: 800;
+    text-decoration: none;
+    padding: 0 4px 1px;
+    background: linear-gradient(transparent 62%, #ffc600 62%);
+    transform: rotate(-1.5deg);
+    transition: transform 0.15s ease, background-position 0.15s ease;
+  }
+  .wb-name:hover { transform: rotate(-2.5deg) scale(1.04); }
+
   @media (max-width: 540px) {
     body { padding: 16px 10px 40px; }
     .content { padding: 24px 20px 32px; }
@@ -367,6 +389,10 @@ ${ogTags}
     </div>
   </div>
 </div>
+
+<footer class="wb-footer">
+  Made by <a class="wb-name" href="https://wesbos.com">Wes Bos</a>
+</footer>
 
 <script>
   (function () {
