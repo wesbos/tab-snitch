@@ -60,6 +60,9 @@ export const QUICK_PICKS: QuickPick[] = [
   { preset: "chatgpt", title: "rewrite this email to sound confident" },
   { preset: "chatgpt", title: "write excuse for being late" },
   { preset: "claude", title: "explain git rebase like im 5" },
+  { preset: "claude", title: "fix all my failing tests please" },
+  { preset: "claude", title: "is this production ready yes or no" },
+  { preset: "claude", title: "why is my regex not matching" },
 
   // Work chatter
   { preset: "linkedin", title: "Software Engineer jobs near me" },
