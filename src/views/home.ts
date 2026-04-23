@@ -545,7 +545,13 @@ ${ogTags}
       updateTileHrefs(slug);
     }
 
-    // Plain click = select preset; modifier/middle-click = open decoy in new tab
+    function unslug(s) {
+      return (s || '').split('-').filter(Boolean).map(function (w) {
+        return w.charAt(0).toUpperCase() + w.slice(1);
+      }).join(' ');
+    }
+
+    // Plain click = select preset + pushState; modifier/middle-click = open decoy in new tab
     presetTiles.forEach(function (a) {
       a.addEventListener('click', function (e) {
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
@@ -555,7 +561,22 @@ ${ogTags}
           radio.checked = true;
           render();
         }
+        if (a.href && location.href !== a.href) {
+          history.pushState(null, '', a.href);
+        }
       });
+    });
+
+    window.addEventListener('popstate', function () {
+      var parts = location.pathname.split('/').filter(Boolean);
+      if (parts.length === 2 && !parts[0].startsWith('d') && parts[0].length > 1) {
+        var radio = document.querySelector('input[name="source"][value="preset:' + parts[0] + '"]');
+        if (radio) {
+          radio.checked = true;
+          titleInput.value = parts[1] === 'untitled' ? '' : unslug(parts[1]);
+          render();
+        }
+      }
     });
 
     titleInput.addEventListener('input', render);
