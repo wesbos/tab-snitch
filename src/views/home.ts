@@ -328,25 +328,62 @@ ${ogTags}
   .pick img { flex-shrink: 0; }
   .pick span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  button[type="submit"] {
+  /* Title input + submit combined control */
+  .title-field {
+    display: flex;
+    align-items: stretch;
+    border: var(--border) solid var(--black);
+    border-radius: 4px;
+    background: var(--white);
+    box-shadow: 4px 4px 0 var(--black);
+    overflow: hidden;
+    transition: box-shadow 0.1s, transform 0.1s;
+  }
+  .title-field:focus-within {
+    background: #fffbe6;
+    box-shadow: 6px 6px 0 var(--yellow), 6px 6px 0 2px var(--black);
+    transform: translate(-1px, -1px);
+  }
+  .title-field input[type="text"] {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    padding: 14px 16px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+    border-radius: 0;
+  }
+  .title-field input[type="text"]:focus {
+    outline: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .title-field button[type="submit"] {
     appearance: none;
+    flex-shrink: 0;
     background: var(--yellow);
     color: var(--black);
-    border: var(--border) solid var(--black);
-    padding: 14px 24px;
-    font-size: 16px;
+    border: 0;
+    border-left: var(--border) solid var(--black);
+    padding: 0 22px;
+    font-size: 14px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    border-radius: 4px;
+    letter-spacing: 0.05em;
     cursor: pointer;
     font-family: inherit;
-    margin-top: 10px;
-    box-shadow: 5px 5px 0 var(--black);
-    transition: transform 0.1s, box-shadow 0.1s;
+    white-space: nowrap;
+    transition: background 0.1s;
   }
-  button[type="submit"]:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--black); }
-  button[type="submit"]:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--black); }
+  .title-field button[type="submit"]:hover { background: #ffd633; }
+  .title-field button[type="submit"]:active { background: #e6b300; }
+
+  @media (max-width: 540px) {
+    .title-field { flex-direction: column; }
+    .title-field button[type="submit"] { border-left: 0; border-top: var(--border) solid var(--black); padding: 12px; }
+  }
 
   /* Wes Bos signature footer — yellow highlighter under the name */
   .wb-footer {
@@ -415,7 +452,10 @@ ${ogTags}
     <form method="post" action="/make">
       <div class="card">
         <label class="field" for="title">Tab title</label>
-        <input id="title" name="title" type="text" placeholder="Inbox (453)" value="${escapeHtml(prefillTitle)}" required autocomplete="off">
+        <div class="title-field">
+          <input id="title" name="title" type="text" placeholder="Inbox (453)" value="${escapeHtml(prefillTitle)}" required autocomplete="off">
+          <button type="submit">Generate fake tab</button>
+        </div>
       </div>
 
       <div class="card">
@@ -429,8 +469,6 @@ ${ogTags}
           <input name="domain" type="text" placeholder="example.com" value="${escapeHtml(customDomain)}" autocomplete="off">
         </div>
       </div>
-
-      <button type="submit">Generate fake tab</button>
     </form>
 
     <div class="card" style="margin-top: 24px">
