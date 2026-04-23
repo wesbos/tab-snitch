@@ -65,34 +65,47 @@ export function homePage(c: Context, opts: HomeOptions = {}): Response {
 
   const head = `<link rel="icon" type="image/png" href="${escapeHtml(iconPath)}">
 ${ogTags}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-  :root { color-scheme: light; }
+  :root {
+    color-scheme: light;
+    --yellow: #ffc600;
+    --black: #000;
+    --white: #fff;
+    --cream: #fbfbfb;
+    --lightGrey: #d8d8d8;
+    --border: 2.5px;
+    --display: "Archivo Black", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
   body {
     font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    background: linear-gradient(180deg, #b8c4d4 0%, #d8dadd 55%, #c8cdd3 100%);
+    background-color: var(--cream);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
     min-height: 100vh;
-    color: #222;
+    color: var(--black);
     padding: 40px 16px 80px;
   }
 
-  /* Fake browser window */
+  /* Fake browser window — chunky wesbos border + hard offset shadow */
   .browser {
     max-width: 920px;
     margin: 0 auto;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow:
-      0 30px 80px rgba(20, 30, 50, 0.25),
-      0 10px 24px rgba(20, 30, 50, 0.12),
-      0 1px 0 rgba(255, 255, 255, 0.4) inset;
+    background: var(--white);
+    border: var(--border) solid var(--black);
+    border-radius: 6px;
+    box-shadow: 10px 10px 0 var(--black);
     overflow: hidden;
   }
 
   .chrome {
     background: linear-gradient(to bottom, #e9ebef, #dfe2e6);
-    border-bottom: 1px solid #c4c7cc;
+    border-bottom: var(--border) solid var(--black);
   }
 
   .titlebar {
@@ -135,11 +148,12 @@ ${ogTags}
     max-width: 260px;
     background: #fff;
     border-radius: 8px 8px 0 0;
-    border: 1px solid #c4c7cc;
+    border: 2px solid var(--black);
     border-bottom: none;
-    margin-bottom: -1px;
+    margin-bottom: -2.5px;
     position: relative;
     z-index: 1;
+    box-shadow: inset 0 -3px 0 var(--yellow);
   }
   .tab img { width: 16px; height: 16px; flex-shrink: 0; }
   .tab .tab-title {
@@ -195,11 +209,12 @@ ${ogTags}
   .url-input {
     flex: 1;
     background: #fff;
-    border: 1px solid #d2d4d8;
+    border: 2px solid var(--black);
     border-radius: 6px;
     padding: 5px 10px;
-    font-size: 13px;
-    color: #333;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: #111;
     display: flex;
     align-items: center;
     gap: 7px;
@@ -213,90 +228,125 @@ ${ogTags}
   }
 
   /* Content area */
-  .content { padding: 32px 36px 40px; background: #fff; }
-  h1 { margin: 0 0 4px; font-size: 28px; }
-  .sub { color: #666; margin: 0 0 24px; }
+  .content { padding: 40px 40px 48px; background: var(--white); }
+  h1 {
+    margin: 0 0 10px;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 52px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+  h1 .hl {
+    display: inline-block;
+    padding: 0 8px 2px;
+    background: linear-gradient(transparent 58%, var(--yellow) 58%);
+    transform: rotate(-1.5deg);
+  }
+  .sub {
+    color: #111;
+    margin: 0 0 28px;
+    font-size: 17px;
+    max-width: 46ch;
+  }
   .card {
-    background: #f8f9fb;
-    border: 1px solid #e4e6eb;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 16px;
+    background: var(--white);
+    border: var(--border) solid var(--black);
+    border-radius: 6px;
+    padding: 22px;
+    margin-bottom: 18px;
+    box-shadow: 5px 5px 0 var(--black);
   }
   label.field, .card > .field {
     display: block;
-    font-weight: 600;
-    margin-bottom: 8px;
-    font-size: 13px;
+    font-family: var(--mono);
+    font-weight: 500;
+    margin-bottom: 12px;
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #555;
+    letter-spacing: 0.08em;
+    color: var(--black);
   }
   input[type="text"] {
     width: 100%;
-    padding: 10px 12px;
+    padding: 12px 14px;
     font-size: 16px;
-    border: 1px solid #d0d4da;
-    border-radius: 8px;
-    background: #fff;
-    color: #222;
+    border: var(--border) solid var(--black);
+    border-radius: 4px;
+    background: var(--white);
+    color: var(--black);
     font-family: inherit;
+    font-weight: 500;
   }
-  input[type="text"]::placeholder { color: #9aa0a6; }
-  input[type="text"]:focus { outline: 2px solid #3366ff; border-color: #3366ff; }
+  input[type="text"]::placeholder { color: #8a8f98; font-weight: 400; }
+  input[type="text"]:focus {
+    outline: 0;
+    background: #fffbe6;
+    box-shadow: 4px 4px 0 var(--yellow);
+  }
 
-  .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 4px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); gap: 5px; }
   .tile {
     position: relative;
     display: flex; align-items: center; justify-content: center;
     padding: 6px;
     aspect-ratio: 1;
-    border: 2px solid #e4e6eb;
-    border-radius: 8px;
+    border: 2.5px solid var(--black);
+    border-radius: 4px;
     cursor: pointer;
-    background: #fff;
-    transition: border-color 0.1s, background 0.1s;
+    background: var(--white);
+    transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
   }
-  .tile:hover { background: #f0f3f7; border-color: #c5cad1; }
+  .tile:hover { background: #fff8d0; transform: translate(-1px, -1px); box-shadow: 2px 2px 0 var(--black); }
   .tile input { position: absolute; opacity: 0; pointer-events: none; }
-  .tile:has(input:checked) { border-color: #3366ff; background: #eef2ff; }
+  .tile:has(input:checked) { background: var(--yellow); transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--black); }
   .tile img { display: block; width: 22px; height: 22px; }
 
-  .custom-row { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
-  .custom-row label.tile { padding: 8px 12px; aspect-ratio: auto; min-width: 120px; font-size: 13px; white-space: nowrap; }
+  .custom-row { display: flex; gap: 10px; align-items: center; margin-top: 14px; }
+  .custom-row label.tile {
+    padding: 10px 14px; aspect-ratio: auto; min-width: 140px;
+    font-size: 13px; white-space: nowrap; font-weight: 600;
+  }
   .custom-row input[type="text"] { flex: 1; }
 
-  .picks { display: flex; flex-wrap: wrap; gap: 6px; }
+  .picks { display: flex; flex-wrap: wrap; gap: 8px; }
   .pick {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 10px 6px 8px;
-    background: #fff;
-    border: 1px solid #e4e6eb;
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 12px 7px 9px;
+    background: var(--white);
+    border: 2px solid var(--black);
     border-radius: 999px;
     font-size: 13px;
-    color: #222;
+    font-weight: 600;
+    color: var(--black);
     text-decoration: none;
-    max-width: 260px;
-    transition: background 0.1s, border-color 0.1s, transform 0.1s;
+    max-width: 280px;
+    transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
   }
-  .pick:hover { background: #eef2ff; border-color: #b9c3d6; transform: translateY(-1px); }
+  .pick:hover { background: var(--yellow); transform: translate(-1px, -1px); box-shadow: 2px 2px 0 var(--black); }
   .pick img { flex-shrink: 0; }
   .pick span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
   button[type="submit"] {
     appearance: none;
-    background: #3366ff;
-    color: white;
-    border: 0;
-    padding: 12px 20px;
+    background: var(--yellow);
+    color: var(--black);
+    border: var(--border) solid var(--black);
+    padding: 14px 24px;
     font-size: 16px;
-    font-weight: 600;
-    border-radius: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-radius: 4px;
     cursor: pointer;
     font-family: inherit;
-    margin-top: 8px;
+    margin-top: 10px;
+    box-shadow: 5px 5px 0 var(--black);
+    transition: transform 0.1s, box-shadow 0.1s;
   }
-  button[type="submit"]:hover { background: #2855e0; }
+  button[type="submit"]:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--black); }
+  button[type="submit"]:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--black); }
 
   /* Wes Bos signature footer — yellow highlighter under the name */
   .wb-footer {
@@ -359,8 +409,8 @@ ${ogTags}
     </div>
   </div>
   <div class="content">
-    <h1>Tab Snitch</h1>
-    <p class="sub">Fake the title and favicon of a browser tab. Pick an icon, type a title, and you'll get a bookmarkable URL.</p>
+    <h1><span class="hl">Tab Snitch</span></h1>
+    <p class="sub">Liven up your screenshots with errant open tabs.</p>
 
     <form method="post" action="/make">
       <div class="card">
