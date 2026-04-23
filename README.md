@@ -1,8 +1,8 @@
-# funny tab
+# Tab Snitch
 
 Fake a browser tab's title and favicon. Bookmarkable decoy URLs so you can refresh and keep the prank going.
 
-![funny tab screenshot](docs/screenshot.png)
+![Tab Snitch screenshot](docs/screenshot.png)
 
 ## URLs
 

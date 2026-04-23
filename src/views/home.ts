@@ -25,7 +25,7 @@ export function homePage(c: Context, opts: HomeOptions = {}): Response {
 
   const preset = presetSlug ? PRESETS[presetSlug] : undefined;
   const initialDomain = preset?.domain ?? (customDomain || "google.com");
-  const initialTabTitle = prefillTitle || "funny tab";
+  const initialTabTitle = prefillTitle || "Tab Snitch";
   const initialTabLabel = prefillTitle || "New Tab";
   const iconPath = `/icon/${encodeURIComponent(initialDomain)}`;
   const initialUrl = `${initialDomain}${titleSlug ? `/${titleSlug}` : ""}`;
@@ -337,7 +337,7 @@ ${ogTags}
     </div>
   </div>
   <div class="content">
-    <h1>funny tab</h1>
+    <h1>Tab Snitch</h1>
     <p class="sub">Fake the title and favicon of a browser tab. Pick an icon, type a title, and you'll get a bookmarkable URL.</p>
 
     <form method="post" action="/make">
@@ -404,7 +404,7 @@ ${ogTags}
     function render() {
       var rawTitle = titleInput.value;
       var tabLabel = rawTitle || 'New Tab';
-      var docTitle = rawTitle || 'funny tab';
+      var docTitle = rawTitle || 'Tab Snitch';
       var domain = currentDomain();
       var slug = toSlug(rawTitle);
       var iconUrl = '/icon/' + encodeURIComponent(domain);
