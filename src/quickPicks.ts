@@ -17,6 +17,15 @@ export const QUICK_PICKS: QuickPick[] = [
   { preset: "google", title: "symptoms of burnout" },
   { preset: "google", title: "how much PTO do I have left" },
 
+  // Google Search — embarrassing medical
+  { preset: "google", title: "itchy bum hole" },
+  { preset: "google", title: "why do my farts smell like rotten eggs" },
+  { preset: "google", title: "is it normal to have 3 nipples" },
+  { preset: "google", title: "hemorrhoids or something worse" },
+  { preset: "google", title: "strange lump near groin" },
+  { preset: "google", title: "toe fungus home remedies" },
+  { preset: "google", title: "why is my pee green" },
+
   // Netflix
   { preset: "netflix", title: "The Office" },
   { preset: "netflix", title: "Severance Season 2" },
@@ -27,6 +36,16 @@ export const QUICK_PICKS: QuickPick[] = [
   { preset: "youtube", title: "10 hours of rain sounds" },
   { preset: "youtube", title: "asmr keyboard typing" },
   { preset: "youtube", title: "minecraft speedrun WR" },
+
+  // Embarrassing media consumption
+  { preset: "youtube", title: "anime big boys" },
+  { preset: "youtube", title: "cute cat videos 10 hours" },
+  { preset: "youtube", title: "how to flirt with confidence" },
+  { preset: "youtube", title: "bronies explained" },
+  { preset: "netflix", title: "Twilight Saga Eclipse" },
+  { preset: "netflix", title: "My Little Pony Friendship is Magic" },
+  { preset: "spotify", title: "Disney Princess Sing Along" },
+  { preset: "tiktok", title: "gentle parenting for adults" },
 
   // Stack Overflow
   { preset: "stackoverflow", title: "how to exit vim" },
