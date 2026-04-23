@@ -31,15 +31,17 @@ export function homePage(c: Context, opts: HomeOptions = {}): Response {
   const initialUrl = `${initialDomain}${titleSlug ? `/${titleSlug}` : ""}`;
   const isHijacked = Boolean(titleSlug);
 
+  const initialTileSlug = titleSlug || "untitled";
   const tiles = Object.entries(PRESETS)
     .map(([slug, p]) => {
       const value = `preset:${slug}`;
       const checked = value === selectedSource ? " checked" : "";
+      const href = `/${slug}/${initialTileSlug}`;
       return `
-      <label class="tile" title="${escapeHtml(p.label)}">
-        <input type="radio" name="source" value="${escapeHtml(value)}"${checked}>
+      <a class="tile" href="${escapeHtml(href)}" data-preset="${escapeHtml(slug)}" title="${escapeHtml(p.label)}">
+        <input type="radio" name="source" value="${escapeHtml(value)}"${checked} tabindex="-1" aria-hidden="true">
         <img src="/icon/${escapeHtml(p.domain)}" alt="${escapeHtml(p.label)}" width="22" height="22" loading="lazy">
-      </label>`;
+      </a>`;
     })
     .join("");
 
@@ -296,6 +298,8 @@ ${ogTags}
     border-radius: 4px;
     cursor: pointer;
     background: var(--white);
+    color: inherit;
+    text-decoration: none;
     transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
   }
   .tile:hover { background: #fff8d0; transform: translate(-1px, -1px); box-shadow: 2px 2px 0 var(--black); }
@@ -515,6 +519,15 @@ ${ogTags}
       document.head.appendChild(link);
     }
 
+    var presetTiles = document.querySelectorAll('a.tile[data-preset]');
+
+    function updateTileHrefs(slug) {
+      var s = slug || 'untitled';
+      presetTiles.forEach(function (a) {
+        a.href = '/' + a.dataset.preset + '/' + s;
+      });
+    }
+
     function render() {
       var rawTitle = titleInput.value;
       var tabLabel = rawTitle || 'New Tab';
@@ -529,7 +542,21 @@ ${ogTags}
       urlEl.textContent = fakeUrl;
       document.title = docTitle;
       setFavicon(iconUrl);
+      updateTileHrefs(slug);
     }
+
+    // Plain click = select preset; modifier/middle-click = open decoy in new tab
+    presetTiles.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
+        var radio = a.querySelector('input[type="radio"]');
+        if (radio) {
+          radio.checked = true;
+          render();
+        }
+      });
+    });
 
     titleInput.addEventListener('input', render);
     domainInput.addEventListener('input', function () {
