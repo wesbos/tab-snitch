@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "funny-tab",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-04-23",
+  "workers_dev": true,
+  "preview_urls": true,
+  "routes": [
+    { "pattern": "tab.wesbos.com", "custom_domain": true }
+  ]
+}
