@@ -4,12 +4,6 @@ export interface QuickPick {
 }
 
 export const QUICK_PICKS: QuickPick[] = [
-  // Google Calendar — uh-oh meetings
-  { preset: "calendar", title: "Sync with Manager" },
-  { preset: "calendar", title: "Surprise Q3 Review" },
-  { preset: "calendar", title: "Chat with HR" },
-  { preset: "calendar", title: "Layoffs Planning" },
-
   // Google Search — panicked queries
   { preset: "google", title: "how to look busy at work" },
   { preset: "google", title: "can my boss see my screen" },
@@ -71,9 +65,4 @@ export const QUICK_PICKS: QuickPick[] = [
   { preset: "linkedin", title: "Software Engineer jobs near me" },
   { preset: "slack", title: "DM from your manager" },
 
-  // Tickets, meetings, wiki
-  { preset: "jira", title: "Critical bug in production" },
-  { preset: "zoom", title: "All Hands 2pm" },
-  { preset: "notion", title: "Quarterly OKRs" },
-  { preset: "confluence", title: "Onboarding Checklist" },
 ];
