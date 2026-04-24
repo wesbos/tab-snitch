@@ -486,6 +486,7 @@ ${ogTags}
 
 <footer class="wb-footer">
   Made by <a class="wb-name" href="https://wesbos.com">Wes Bos</a>
+  · <a class="wb-name" href="https://github.com/wesbos/tab-snitch">Source on GitHub</a>
 </footer>
 
 <script>
