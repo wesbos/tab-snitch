@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tab-snitch",
+  "name": "funny-tab",
   "main": "src/index.ts",
   "compatibility_date": "2026-04-23",
   "workers_dev": true,
