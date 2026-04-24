@@ -178,18 +178,20 @@ ${ogTags}
   .tab .tab-close:hover { background: #d6d8dc; color: #000; }
 
   .tab-new {
-    appearance: none;
-    background: transparent;
-    border: 0;
+    display: flex; align-items: center; justify-content: center;
     width: 28px; height: 28px;
     margin-bottom: 4px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; color: #666;
+    background: transparent;
+    border: 0;
+    font-size: 20px;
+    line-height: 1;
+    color: #666;
     font-family: inherit;
     border-radius: 6px;
-    cursor: default;
+    text-decoration: none;
+    cursor: pointer;
   }
-  .tab-new:hover { background: rgba(0,0,0,0.05); }
+  .tab-new:hover { background: rgba(0,0,0,0.08); color: var(--black); }
 
   .urlbar {
     display: flex;
@@ -436,7 +438,7 @@ ${ogTags}
           <span id="chrome-tab-title" class="tab-title">${escapeHtml(initialTabLabel)}</span>
           <span class="tab-close" aria-hidden="true">×</span>
         </div>
-        <button class="tab-new" type="button" tabindex="-1" aria-hidden="true">+</button>
+        <a class="tab-new" href="/" target="_blank" rel="noopener" aria-label="New tab">+</a>
       </div>
     </div>
     <div class="urlbar">
